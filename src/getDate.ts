@@ -107,4 +107,5 @@ export {
     getThisWeek,
     getThisMonth,
     formatDate,
+    getMonthDays,
 }
