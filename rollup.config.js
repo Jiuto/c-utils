@@ -5,7 +5,7 @@ import typescript from 'rollup-plugin-typescript';
 export default {
   input: 'src/index.ts',
   output: {
-    name: 'c_utils',
+    name: 'dc-utils',
     file: 'dist/index.js',
     format: 'umd', // umd是兼容amd/cjs/iife的通用打包格式，适合浏览器
   },

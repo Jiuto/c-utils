@@ -1,7 +1,7 @@
 import * as getDate from './getDate';
 
-var c_utils = {
+var utils = {
     ...getDate
 }
 
-export default c_utils;
+export default utils;
