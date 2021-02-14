@@ -3,7 +3,8 @@ var now: Date = new Date(),                             //当前日期
     nowDay: number = now.getDate(),                     //当前日
     nowMonth: number = now.getMonth(),                  //当前月
     nowYear: number = now.getFullYear(),                //当前年
-    monthDays: number = getMonthDays(nowYear, nowMonth); // 本月天数
+    monthDays: number = getMonthDays(nowYear, nowMonth),// 本月天数
+    weekday: number = now.getDay();                     // 当前周几，周日为0
 
 // 格式化日期：yyyy-MM-dd
 function formatDate(date: Date): string {
@@ -55,21 +56,21 @@ function getMonthDays(y: number, m: number): number {
 
 // 获得本周的开始日期
 function getWeekStartDate(): string {
-    let already: number = now.getDay() - 1,
+    let gap: number = nowDay - (weekday === 0 ? 6 : weekday - 1),
         year: number = nowYear, 
         month: number, 
         day: number;
         
-    if (nowDay - already > 0 ) {
-        day = nowDay - already;
+    if (gap > 0 ) {
+        day = gap;
         month = nowMonth;
     } else if (nowMonth - 1 > 0) {
         month = nowMonth - 1;
-        day = getMonthDays(year, month) + nowDay - already;
+        day = getMonthDays(year, month) + gap;
     } else {
         year = nowYear - 1;
         month = 11;
-        day = getMonthDays(year, month) + nowDay - already;
+        day = getMonthDays(year, month) + gap;
     }
 
     return year + "-" + (month + 1) + "-" + day;
@@ -77,7 +78,7 @@ function getWeekStartDate(): string {
 
 // 获得本周的结束日期
 function getWeekEndDate(): string {
-    let add: number = 7 - now.getDay(),
+    let add: number = weekday === 0 ? 0 : 7 - weekday,
         year: number = nowYear, 
         month: number = nowMonth, 
         day: number = nowDay + add;
